@@ -1,31 +1,42 @@
 <cfscript>
-	// Phrases
     solve("abcd", "defg");
     solve("abcdefghijkl", "cdefg");
     solve("abcdd", "ddefg");
+    solve("abcdd", "dddefg");
 
     private void function solve(required string a, required string b)
     {
+        // Input Arrays
+        var arrayA = listToArray(arguments.a, "");
+        var arrayB = listToArray(arguments.b, "");
+
         // Reduction Count
         var count = 0;
 
         // Comparison
         var compare = [];
         var char = "";
-        for(var x = 1; x <= len(arguments.b); x ++)
+        for(var x = 1; x <= arrayLen(arrayB); x ++)
         {
-            char = mid(arguments.b, x, 1);
-            if(findNoCase(char, arguments.a)) {arrayAppend(compare, char);}
+            char = arrayB[x];
+            if(arrayContains(arrayA, char))
+            {
+                arrayAppend(compare, char);
+                arrayDelete(arrayA, char);
+            }
 
             // Characters to remove from B
             else {count ++;}
         }
 
         // Characters to remove from A
-        for(var y = 1; y <= len(arguments.a); y ++)
+        for(var y = 1; y <= arrayLen(arrayA); y ++)
         {
-            char = mid(arguments.a, y, 1);
+            char = arrayA[y];
             if(!arrayContains(compare, char)) {count ++;}
+
+            // Remove from future comparison
+            else {arrayDelete(compare, char);}
         }
 
         // Result
