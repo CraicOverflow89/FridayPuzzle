@@ -5,6 +5,7 @@ Answers to the puzzles on cfml slack.
 ### 07/10/2016 (Ransom Note)
 
 https://www.hackerrank.com/challenges/ctci-ransom-note
+
 https://jsfiddle.net/CraicOverflow89/3egya61s/ (my solution)
 
 ### 30/09/2016 (Anagrams)
